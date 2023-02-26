@@ -1,0 +1,41 @@
+﻿@using Microsoft.AspNetCore.Mvc;
+@using Radzen;
+@using Radzen.Blazor
+
+<button class="btn btn-primary">sdfsdf?</button>
+
+<RadzenButton Text="Show info notification" class="btn btn-success"
+    ButtonStyle="ButtonStyle.Info"
+    Click=@(args => ShowNotification(new NotificationMessage { Severity = NotificationSeverity.Info, Summary = "Info Summary", Detail = "Info Detail", Duration = 4000 })) />
+
+<RadzenDropDown FilterCaseSensitivity="FilterCaseSensitivity.CaseInsensitive" FilterOperator="StringFilterOperator.StartsWith" 
+                AllowFiltering="true"
+                Data=@customers TextProperty="Name" ValueProperty="FullName" AllowClear="true" @bind-Value=value />
+
+
+
+@code {
+  @inject NotificationService NotificationService
+  IEnumerable<Type> customers;
+  string value;
+
+  protected override async Task OnInitializedAsync()
+  {
+    await base.OnInitializedAsync();
+
+    customers = typeof(Controller).Assembly.GetTypes();
+    
+  }
+
+  void ShowNotification(NotificationMessage message)
+  {
+    NotificationService.Notify(message);
+
+  }
+
+  void NotificationClick(NotificationMessage message)
+  {
+    return;
+  }
+}
+

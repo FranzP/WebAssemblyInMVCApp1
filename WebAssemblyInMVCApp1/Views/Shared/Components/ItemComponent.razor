@@ -1,34 +1,45 @@
-﻿<h3>ItemComponent</h3>
+﻿@*@using Blazorise;*@
+<h3>ItemComponent</h3>
 
-@if(ItemDetails is not null)
+@if (ItemDetails is not null)
 {
-    <dl>
-        <dt>Id</dt>
-        <dd>@ItemDetails.Id</dd>
+  <dl>
+    <dt>Id</dt>
+    <dd>@ItemDetails.Id</dd>
 
-        <dt>Name</dt>
-        <dd>@ItemDetails.Name</dd>
+    <dt>Name</dt>
+    <dd>@ItemDetails.Name</dd>
 
-        <dt>Description</dt>
-        <dd>@ItemDetails.Description</dd>
-    </dl>
+    <dt>Description</dt>
+    <dd>@ItemDetails.Description</dd>
+  </dl>
 
-    <button id="CurrentCountButton" class="btn btn-primary" @onclick="CurrentCountClick">Current Count: @currentCount</button>
+  <button id="CurrentCountButton" class="btn btn-primary" @onclick="CurrentCountClick">Current Count: @currentCount</button>
+
+  @*<button Color="Color.Warning" @onclick="ShowWarningNotification">Show alert!</button>*@
+
 }
 
 @code {
-    [Parameter]
-    public WebAssemblyInMVCApp1.Models.Item? ItemDetails { get; set; }
+  //[Inject] INotificationService NotificationService { get; set; }
 
-    private int currentCount = 0;
+  [Parameter]
+  public WebAssemblyInMVCApp1.Models.Item? ItemDetails { get; set; }
 
-    protected override void OnInitialized()
-    {
-        base.OnInitialized();
-    }
+  private int currentCount = 0;
 
-    private void CurrentCountClick()
-    {
-        currentCount++;
-    }
+  protected override void OnInitialized()
+  {
+    base.OnInitialized();
+  }
+
+  private void CurrentCountClick()
+  {
+    currentCount++;
+  }
+
+  //Task ShowWarningNotification()
+  //{
+  //  return NotificationService.Warning("This is a simple notification message!", "Hello");
+  //}
 }

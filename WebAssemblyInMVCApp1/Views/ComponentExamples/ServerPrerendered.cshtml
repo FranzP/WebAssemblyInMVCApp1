@@ -1,4 +1,7 @@
-﻿@model Item;
+﻿@using Radzen.Blazor;
+@using WebAssemblyInMVCApp1.Views.Shared.Components;
+@model Item;
+
 @{
     ViewData["Title"] = "Component Example - RenderMode.ServerPrerendered";
 }
@@ -8,6 +11,14 @@
 @await(
     Html.RenderComponentAsync<WebAssemblyInMVCApp1.Views.Shared.Components.ItemComponent>(RenderMode.ServerPrerendered, new { ItemDetails = Model })
 )
+
+<component type="typeof(BButton)" render-mode="ServerPrerendered" />
+
+@*@await(
+    Html.RenderComponentAsync<BButton>(RenderMode.ServerPrerendered)
+)*@
+
+
 
 @section Scripts {
     <base href="~/" />
